@@ -26,7 +26,6 @@ def show_data(data):
             kata, arti = row
             print(f"{i}.{kata} - {arti}")
     print("-" * 40)
-    lanjut = input("Tekan enter untuk kembali ke menu utama.......")
 
 
 def add_data(data):
@@ -34,7 +33,9 @@ def add_data(data):
     arti = input(f"Masukkan Makna ({kata}): ")
     data.append([kata, arti])
     save_data(data)
-    print("Entry berhasil ditambahkan!\n")
+    print(f"Entry,\n"
+          f"{kata} - {arti}\n"
+          f"Berhasil ditambahkan!")
 
 
 def edit_data(data):
@@ -62,6 +63,8 @@ def delete_data(data):
 
 
 def search_data(data):
+    print("1. Pencarian semua", "2. Pencarian kata", "3. Pencarian arti", sep="\n")
+    opsicari = input("Pilih opsi pencarian entry :")
     keyword = input("Masukkan kata kunci pencarian: ").lower()
     found = False
     for row in data:
@@ -69,14 +72,39 @@ def search_data(data):
             found = True
             break
     if found:
-        hasil = [e for e in data if keyword in e[0].lower() or keyword in e[1].lower()]
-        print(f"{keyword} ditemukan! \n")
-        for i, row in enumerate(hasil, 1):
-            if len(row) == 2:
-                kata, arti = row
-                print(f"{i}.{kata} - {arti}")
-        print("\n", "-" * 40, sep="")
-        lanjut = input("Tekan enter untuk kembali ke menu utama.......")
+        if opsicari == "1":
+            hasil = [e for e in data if keyword in e[0].lower() or keyword in e[1].lower()]
+            print(f"{keyword} ditemukan! \n")
+            for i, row in enumerate(hasil, 1):
+                if len(row) == 2:
+                    kata, arti = row
+                    print(f"{i}.{kata} - {arti}")
+            print("\n", "-" * 40, sep="")
+            lanjut = input("Tekan enter untuk kembali ke menu utama.......")
+
+        elif opsicari == "2":
+            hasil = [e for e in data if keyword in e[0].lower()]
+            print(f"{keyword} ditemukan! \n")
+            for i, row in enumerate(hasil, 1):
+                if len(row) == 2:
+                    kata, arti = row
+                    print(f"{i}.{kata} - {arti}")
+            print("\n", "-" * 40, sep="")
+            lanjut = input("Tekan enter untuk kembali ke menu utama.......")
+
+        elif opsicari == "3":
+            hasil = [e for e in data if keyword in e[1].lower()]
+            print(f"{keyword} ditemukan! \n")
+            for i, row in enumerate(hasil, 1):
+                if len(row) == 2:
+                    kata, arti = row
+                    print(f"{i}.{kata} - {arti}")
+            print("\n", "-" * 40, sep="")
+            lanjut = input("Tekan enter untuk kembali ke menu utama.......")
+
+        else:
+            print("Opsi tidak valid!")
+
     else:
         print("Entry tidak ditemukan!\nCoba lagi!")
         search_data(data)
