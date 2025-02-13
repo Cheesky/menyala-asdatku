@@ -19,52 +19,50 @@ def save_data(data):
 
 
 def show_data(data):
-    #if not data:
-        #print("\nData tidak ada!\n Coba lagi")
-        #return
-    print("=" * 25)
-    print("Daftar Kamus Gen Alpha: \n")
+    print("-" * 40)
+    print("Daftar entry Kamus Gen Alpha: \n")
     for i, row in enumerate(data, 1):
         if len(row) == 2:
             kata, arti = row
             print(f"{i}.{kata} - {arti}")
-    print("=" * 25)
+    print("-" * 40)
+    lanjut = input("Tekan enter untuk kembali ke menu utama.......")
 
 
 def add_data(data):
     kata = input("Masukkan Kata: ")
-    arti = input("Masukkan Makna: ")
+    arti = input(f"Masukkan Makna ({kata}): ")
     data.append([kata, arti])
     save_data(data)
-    print("Entry Berhasil Ditambahkan!\n")
+    print("Entry berhasil ditambahkan!\n")
 
 
 def edit_data(data):
     show_data(data)
-    index = int(input("Masukkan Nomor Entry yang ingin diubah: ")) - 1
+    index = int(input("Masukkan nomor entry yang ingin diubah: ")) - 1
     if 0 <= index < len(data):
-        kata = input(f"Masukkan Kata Baru ({data[index][0]}): ") or data[index][0]
-        arti = input(f"Masukkan Makna dari Kata Baru ({data[index][1]}): ") or data[index][1]
+        kata = input(f"Masukkan kata baru ({data[index][0]}): ") or data[index][0]
+        arti = input(f"Masukkan makna baru dari ({kata}) ({data[index][1]}): ") or data[index][1]
         data[index] = [kata, arti]
         save_data(data)
-        print("Entry Berhasil Diubah!")
+        print("Entry berhasil diubah!")
     else:
-        print("Entry Tidak Ada")
+        print("Entry tidak ada")
 
 
 def delete_data(data):
     show_data(data)
-    index = int(input("Masukan Nomor Entry Yang Ingin Dihapus: ")) - 1
+    index = int(input("Masukan nomor entry yang ingin dihapus: ")) - 1
     if 0 <= index < len(data):
         data.pop(index)
         save_data(data)
-        print("Entry Berhasil Dihapus!")
+        print("Entry berhasil dihapus!")
     else:
-        print("Entry Tidak Ada")
+        print("Entry tidak ada")
 
 
 def search_data(data):
-    keyword = input("Masukkan Kata Kunci Pencarian: ").lower()
+    keyword = input("Masukkan kata kunci pencarian: ").lower()
     found = False
     for row in data:
         if any(keyword == element.lower() for element in row):
@@ -72,7 +70,13 @@ def search_data(data):
             break
     if found:
         hasil = [e for e in data if keyword in e[0].lower() or keyword in e[1].lower()]
-        show_data(hasil)
+        print(f"{keyword} ditemukan! \n")
+        for i, row in enumerate(hasil, 1):
+            if len(row) == 2:
+                kata, arti = row
+                print(f"{i}.{kata} - {arti}")
+        print("\n", "-" * 40, sep="")
+        lanjut = input("Tekan enter untuk kembali ke menu utama.......")
     else:
         print("Entry tidak ditemukan!\nCoba lagi!")
         search_data(data)
@@ -91,26 +95,26 @@ def SelectionSort(data, posisi=0):
 
 
 def sort_data(data):
-    pilihan = input("Urutkan Entry Berdasarkan (1: Kata 2: Makna): ").lower()
+    pilihan = input("Urutkan entry berdasarkan (1: Kata 2: Makna): ").lower()
     valid = True
     if pilihan == "1":
         data = SelectionSort(data, 0)
     elif pilihan == "2":
         data = SelectionSort(data, 1)
     else:
-        print("Input Tidak Valid!")
+        print("Input tidak valid!")
         valid = False
 
     if valid:
         save_data(data)
-        print("-" * 30)
-        print("Entry Berhasil Diurukan!")
-        print("Daftar Entry: ")
+        print("-" * 40)
+        print("Daftar entry berhasil diurutkan!")
+        print("Daftar entry: ")
         for i, row in enumerate(data, 1):
             if len(row) == 2:
                 kata, arti = row
-                print(f"{i}.{kata}.{arti}")
-        print("-" * 30)
+                print(f"{i}. {kata} : {arti}")
+        #print("-" * 30)
     else:
         return 0
 
@@ -118,9 +122,11 @@ def sort_data(data):
 def main():
     data = load_data()
     while True:
-        print("*" * 30)
+        print("-" * 40)
         print("""
-Selamat Datang di Kamus Gen Alpha!
+Selamat Datang di SiMaK Gen Alpha!
+(Sistem Manajemen Kamus Gen Alpha)
+
 Silahkan Memilih Opsi Berikut:
 
 1. Tambah Entry
@@ -131,7 +137,7 @@ Silahkan Memilih Opsi Berikut:
 6. Tampilkan Entry
 0. Keluar
         """)
-        print("*" * 30)
+        print("-" * 40)
         pilihan = input("Pilih Menu : ")
         if pilihan == "1":
             add_data(data)
@@ -149,7 +155,7 @@ Silahkan Memilih Opsi Berikut:
             print("Keluar dari program............")
             break
         else:
-            print("Pilihan Tidak Valid! Coba Lagi. \n")
+            print("Pilihan tidak valid! Coba lagi. \n")
 
 
 if __name__ == "__main__":
