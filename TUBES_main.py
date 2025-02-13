@@ -19,9 +19,9 @@ def save_data(data):
 
 
 def show_data(data):
-    if not data:
-        print("\n Data tidak ada!\n")
-        return
+    #if not data:
+        #print("\nData tidak ada!\n Coba lagi")
+        #return
     print("=" * 25)
     print("Daftar Kamus Gen Alpha: \n")
     for i, row in enumerate(data, 1):
@@ -65,8 +65,18 @@ def delete_data(data):
 
 def search_data(data):
     keyword = input("Masukkan Kata Kunci Pencarian: ").lower()
-    hasil = [e for e in data if keyword in e[0].lower() or keyword in e[1].lower()]
-    show_data(hasil)
+    found = False
+    for row in data:
+        if any(keyword == element.lower() for element in row):
+            found = True
+            break
+    if found:
+        hasil = [e for e in data if keyword in e[0].lower() or keyword in e[1].lower()]
+        show_data(hasil)
+    else:
+        print("Entry tidak ditemukan!\nCoba lagi!")
+        search_data(data)
+
 
 
 def SelectionSort(data, posisi=0):
@@ -110,16 +120,16 @@ def main():
     while True:
         print("*" * 30)
         print("""
-        Selamat Datang di Kamus Gen Alpha!
-        Silahkan Memilih Opsi Berikut:
+Selamat Datang di Kamus Gen Alpha!
+Silahkan Memilih Opsi Berikut:
 
-        1. Tambah Entry
-        2. Ubah Entry
-        3. Hapus Entry
-        4. Cari Entry
-        5. Urutkan Entry
-        6. Tampilkan Entry
-        0. Keluar
+1. Tambah Entry
+2. Ubah Entry
+3. Hapus Entry
+4. Cari Entry
+5. Urutkan Entry
+6. Tampilkan Entry
+0. Keluar
         """)
         print("*" * 30)
         pilihan = input("Pilih Menu : ")
