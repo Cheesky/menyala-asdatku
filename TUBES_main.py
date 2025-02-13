@@ -33,7 +33,7 @@ def show_data(data):
 
 def add_data(data):
     kata = input("Masukkan Kata: ")
-    arti = input("Masukkan Arti: ")
+    arti = input("Masukkan Makna: ")
     data.append([kata, arti])
     save_data(data)
     print("Entry Berhasil Ditambahkan!\n")
@@ -41,10 +41,10 @@ def add_data(data):
 
 def edit_data(data):
     show_data(data)
-    index = int(input("Masukkan Nomor Kata yang ingin diubah: ")) - 1
+    index = int(input("Masukkan Nomor Entry yang ingin diubah: ")) - 1
     if 0 <= index < len(data):
         kata = input(f"Masukkan Kata Baru ({data[index][0]}): ") or data[index][0]
-        arti = input(f"Masukkan Arti dari Kata Baru ({data[index][1]}): ") or data[index][1]
+        arti = input(f"Masukkan Makna dari Kata Baru ({data[index][1]}): ") or data[index][1]
         data[index] = [kata, arti]
         save_data(data)
         print("Entry Berhasil Diubah!")
@@ -81,7 +81,7 @@ def SelectionSort(data, posisi=0):
 
 
 def sort_data(data):
-    pilihan = input("Urutkan Entry Berdasarkan (1: Kata 2: Arti Kata): ").lower()
+    pilihan = input("Urutkan Entry Berdasarkan (1: Kata 2: Makna): ").lower()
     valid = True
     if pilihan == "1":
         data = SelectionSort(data, 0)
