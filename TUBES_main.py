@@ -20,13 +20,12 @@ def save_data(data):
 
 def show_data(data):
     print("-" * 40)
-    print("Daftar entry Kamus Gen Alpha: \n")
+    print("\nDaftar entry Kamus Gen Alpha: \n")
     for i, row in enumerate(data, 1):
         if len(row) == 2:
             kata, arti = row
             print(f"{i}.{kata} - {arti}")
-    print("-" * 40)
-    lanjut = input("Tekan enter untuk kembali ke menu utama.......")
+    print("\n", "-" * 40, sep="")
 
 
 def add_data(data):
@@ -110,13 +109,13 @@ def sort_data(data):
     if valid:
         save_data(data)
         print("-" * 40)
-        print("Daftar entry berhasil diurutkan!")
-        print("Daftar entry: ")
+        print("\nDaftar entry berhasil diurutkan!")
+        print("\nDaftar entry: ")
         for i, row in enumerate(data, 1):
             if len(row) == 2:
                 kata, arti = row
                 print(f"{i}. {kata} : {arti}")
-        #print("-" * 30)
+        print("\n")
     else:
         return 0
 
